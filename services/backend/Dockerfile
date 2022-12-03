@@ -1,9 +1,6 @@
-FROM node:16 AS build
-ARG ENV
+FROM node:16
 
 RUN npm install pnpm --global
-
-USER node
 
 WORKDIR /app
 
