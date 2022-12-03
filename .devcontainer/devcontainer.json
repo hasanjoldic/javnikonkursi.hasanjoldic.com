@@ -1,0 +1,34 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/typescript-node
+{
+  "name": "web-frontend-monorepo",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "eamodio.gitlens", // Supercharge Git within VS Code
+        "naumovs.color-highlight", // Highlight web colors in your editor
+        "esbenp.prettier-vscode", // Code formatter using prettier
+        "vscode-icons-team.vscode-icons", // Icons for Visual Studio Code
+        "wesbos.theme-cobalt2", // 🔥 Official theme by Wes Bos.
+        "aaron-bond.better-comments", // Improve your code commenting by annotating with alert, informational, TODOs, and more!
+        "dbaeumer.vscode-eslint", // Integrates ESLint JavaScript into VS Code.
+        "wix.vscode-import-cost", // Display import/require package size in the editor
+        "redhat.vscode-yaml", // YAML Language Support by Red Hat, with built-in Kubernetes syntax support
+        "DavidAnson.vscode-markdownlint", // Markdown linting and style checking for Visual Studio Code
+        "christian-kohler.npm-intellisense" // Visual Studio Code plugin that autocompletes npm modules in import statements
+      ],
+      "settings": {
+        "workbench.colorTheme": "Cobalt2" // "wesbos.theme-cobalt2" // 🔥 Official theme by Wes Bos.
+      }
+    }
+  },
+
+  "initializeCommand": "ssh-add ~/.ssh/*_rsa" //copy ssh keys
+}
