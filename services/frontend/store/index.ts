@@ -1,7 +1,6 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
-// import app from "./app/reducer";
 import filters from "./filters/reducer";
 // import notifications from "./notifications/reducer";
 
@@ -12,7 +11,6 @@ import jobTypes from "./jobTypes/reducer";
 
 export const store = configureStore({
   reducer: {
-    // app,
     filters,
     // notifications,
 
@@ -38,7 +36,6 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 // TODO
-// export * from "./app";
 export * from "./companies";
 export * from "./filters";
 export * from "./jobs";

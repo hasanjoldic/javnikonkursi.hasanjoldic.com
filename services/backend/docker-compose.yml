@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+
+  money.hasanjoldic.com:
+    build: .
+    image: javnikonkursi.hasanjoldic.com
+    container_name: javnikonkursi.hasanjoldic.com
+    restart: always
+    ports:
+      - 3060:3000
+    env_file:
+      - .env

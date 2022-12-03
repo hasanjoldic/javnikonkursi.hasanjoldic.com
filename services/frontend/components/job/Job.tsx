@@ -126,7 +126,7 @@ export const Job: React.FC<IProps> = (props) => {
               </Link>
             )}
             {isDetailPage && job?.externalUrl && (
-              <a href={job.externalUrl} target="_blank">
+              <a href={job.externalUrl} target="_blank" rel="noreferrer">
                 <Button
                   variant="outlined"
                   color="primary"
@@ -139,7 +139,11 @@ export const Job: React.FC<IProps> = (props) => {
           </Box>
           <Box>
             {isDetailPage && (
-              <a href={getJobInternalUrl(job?.id)} target="_blank">
+              <a
+                href={getJobInternalUrl(job?.id)}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Button
                   variant="outlined"
                   color="primary"

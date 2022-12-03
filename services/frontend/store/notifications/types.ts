@@ -1,4 +1,4 @@
-import { OptionsObject } from "notistack";
+// import { OptionsObject } from "notistack";
 
 export enum ENotificationActionType {
   ENQUEUE_SNACKBAR = "@@notification/ENQUEUE_SNACKBAR",
@@ -9,7 +9,8 @@ export enum ENotificationActionType {
 export interface INotification {
   key?: string | number;
   message: string;
-  options?: OptionsObject;
+  // options?: OptionsObject;
+  options?: any;
   dismissed?: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { GetJobTagsQuery } from "generated/types";
+// import { GetJobTagsQuery } from "generated/types";
 
 export enum EJobTagsActionType {
   SET_JOB_TAGS = "@@job-tags/SET_JOB_TAGS",
@@ -6,5 +6,6 @@ export enum EJobTagsActionType {
 }
 
 export interface IJobTagsState {
-  data: GetJobTagsQuery["jobTags"]["nodes"];
+  // data: GetJobTagsQuery["jobTags"]["nodes"];
+  data: any[];
 }

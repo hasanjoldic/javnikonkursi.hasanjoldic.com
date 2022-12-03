@@ -10,8 +10,6 @@
     "start": "node dist/index.js",
     "start:dev": "ts-node src/index.ts",
     "start:watch": "nodemon dist/index.js",
-    "pm2:start": "NODE_ENV=production pm2 start dist/index.js --name javnikonkursi-backend --log pm2.log",
-    "pm2:restart": "NODE_ENV=production pm2 restart javnikonkursi-backend --log pm2.log",
     "db:migrate": "node ./db/migrate.js",
     "codegen": "graphql-codegen --config codegen.yml"
   },

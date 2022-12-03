@@ -2,11 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { gql, useQuery } from "@apollo/client";
-import { GetJobTagsQuery, GetJobTagsQueryVariables } from "generated/types";
-
-import { ArrayElement } from "@javnikonkursi/shared";
-
-import { useApiClient } from "api";
+// import { GetJobTagsQuery, GetJobTagsQueryVariables } from "generated/types";
 
 import { IJobTagsState, EJobTagsActionType } from "./types";
 
@@ -15,7 +11,7 @@ export const setJobTags = (data: IJobTagsState["data"]) => ({
   payload: { data },
 });
 
-export const setJobTag = (id: string, jobTag: ArrayElement<IJobTagsState["data"]>) => ({
+export const setJobTag = (id: string, jobTag: IJobTagsState["data"][0]) => ({
   type: EJobTagsActionType.SET_JOB_TAG,
   payload: { id, jobTag },
 });
@@ -34,14 +30,16 @@ const GET_JOB_TYPE_TAGS = gql`
 
 export const useGetJobTags = () => {
   const dispatch = useDispatch();
-  const apiClient = useApiClient();
 
-  const query = useQuery<GetJobTagsQuery, GetJobTagsQueryVariables>(GET_JOB_TYPE_TAGS);
+  // const query = useQuery<GetJobTagsQuery, GetJobTagsQueryVariables>(
+  //   GET_JOB_TYPE_TAGS
+  // );
+  const query = useQuery<any, any>(GET_JOB_TYPE_TAGS);
   const jobTags = query?.data?.jobTags?.nodes;
 
   useEffect(() => {
     dispatch(setJobTags(jobTags));
-  }, [dispatch, apiClient, jobTags]);
+  }, [dispatch, jobTags]);
 
   return query;
 };

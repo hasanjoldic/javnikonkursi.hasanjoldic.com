@@ -1,52 +1,23 @@
 FROM node:16 as builder
 
-RUN npm install lerna --global
+RUN npm install pnpm --global
 
 WORKDIR /app
 
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY . .
+RUN pnpm run export 
 
-RUN lerna bootstrap --ci
-RUN lerna link
-RUN npm run packages-build
-RUN lerna run --scope @light-space/web-app-main build
+FROM nginx:alpine
 
-FROM node:16-alpine as runner
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+## Remove default nginx index page
+RUN rm -rf /usr/share/nginx/html/*
 
-WORKDIR /app
+COPY --from=builder /app/out /usr/share/nginx/html
 
-COPY --from=builder /app ./
+EXPOSE 3000 80
 
-EXPOSE 3000
-
-ENV PORT 3000
-
-CMD ["npm", "run", "--workspace", "@light-space/web-app-main", "start"]
-
-# FROM node:16-alpine as runner
-
-# ENV NODE_ENV production
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 nextjs
-
-# WORKDIR /app
-
-# COPY --from=builder /app/services/web-app-main/public ./public
-
-# # Automatically leverage output traces to reduce image size
-# # https://nextjs.org/docs/advanced-features/output-file-tracing
-# COPY --from=builder --chown=nextjs:nodejs /app/services/web-app-main/.next/standalone ./
-# COPY --from=builder --chown=nextjs:nodejs /app/services/web-app-main/.next/static ./.next/static
-
-# USER nextjs
-
-# EXPOSE 3000
-
-# ENV PORT 3000
-
-# CMD ["node", "server.js"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

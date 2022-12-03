@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -14,7 +13,7 @@ export const Header: React.FC = () => {
           <Link href="/">
             <a>
               <Box display="flex" alignItems="center" columnGap={4}>
-                <Image src="/logo.png" alt="logo" width={32} height={32} />
+                <img src="/logo.png" alt="logo" width={32} height={32} />
                 <Typography
                   variant="h6"
                   textAlign="center"
