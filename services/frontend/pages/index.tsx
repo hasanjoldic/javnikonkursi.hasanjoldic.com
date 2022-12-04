@@ -31,13 +31,6 @@ const Home: NextPage = () => {
     shallowEqual
   );
 
-  console.log({
-    regionsFilter,
-    jobTypesFilter,
-    companiesFilter,
-    shouldIncludeExpired,
-  });
-
   const currentDate = new Date().toISOString();
 
   const filteredJobs = _orderBy(

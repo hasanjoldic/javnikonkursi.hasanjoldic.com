@@ -99,10 +99,10 @@ export const Job: React.FC<IProps> = (props) => {
       </Box>
       <Divider />
       <Box paddingY={1}>
-        <Typography>
+        <Typography variant="body2">
           Objavljeno: {dateFormat(job?.startDate, EDateFormat["DD.MM.YYYY"])}
         </Typography>
-        <Typography>
+        <Typography variant="body2">
           Ističe: {dateFormat(job?.endDate, EDateFormat["DD.MM.YYYY"])}
         </Typography>
       </Box>

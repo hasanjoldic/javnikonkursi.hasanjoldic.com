@@ -1,5 +1,22 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
+
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { PersistGate } from "redux-persist/integration/react";
 
 import filters from "./filters/reducer";
 // import notifications from "./notifications/reducer";
@@ -9,17 +26,35 @@ import jobs from "./jobs/reducer";
 import jobTypes from "./jobTypes/reducer";
 // import jobTags from "./jobTags/reducer";
 
-export const store = configureStore({
-  reducer: {
-    filters,
-    // notifications,
+const persistConfig = {
+  key: "javnikonkursi.hasanjoldic.com",
+  version: 1,
+  whitelist: ["version", "filters"],
+  storage,
+};
 
-    companies,
-    jobs,
-    jobTypes,
-    // jobTags,
-  },
+const reducer = combineReducers({
+  filters,
+  // notifications,
+
+  companies,
+  jobs,
+  jobTypes,
+  // jobTags,
 });
+
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+});
+
+export const persistor = persistStore(store);
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch: () => AppDispatch = useDispatch;

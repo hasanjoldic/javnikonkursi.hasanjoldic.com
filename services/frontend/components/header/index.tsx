@@ -5,9 +5,13 @@ import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 
-export const Header: React.FC = () => {
+interface Props {
+  height: string | number;
+}
+
+export const Header: React.FC<Props> = ({ height }) => {
   return (
-    <AppBar elevation={0}>
+    <AppBar elevation={0} style={{ height }}>
       <Toolbar>
         <Box width="100%" display="flex" justifyContent="center">
           <Link href="/">

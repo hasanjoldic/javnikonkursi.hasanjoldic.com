@@ -1,4 +1,5 @@
 import styled from "@mui/material/styles/styled";
+import useTheme from "@mui/material/styles/useTheme";
 import Box from "@mui/material/Box";
 
 import { Header } from "../header";
@@ -9,21 +10,24 @@ const Container = styled(Box)(() => ({
   height: "100vh",
   display: "flex",
   flexDirection: "column",
+  overflowX: "hidden",
 }));
 
 const Content = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(5, 3),
+  padding: theme.spacing(0, 3),
   flex: 1,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
 
   [theme.breakpoints.down("md")]: {
-    padding: theme.spacing(5, 0.5),
+    padding: theme.spacing(0, 0.5),
   },
 }));
 
 export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const theme = useTheme();
+
   return (
     <Container
       className="Layout"
@@ -32,8 +36,8 @@ export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
       display="flex"
       flexDirection="column"
     >
-      <Header />
-      <Content className="Content" mt={5}>
+      <Header height={theme.spacing(8)} />
+      <Content className="Content" mt={8}>
         {children}
       </Content>
       <Footer />
